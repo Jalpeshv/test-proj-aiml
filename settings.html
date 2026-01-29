@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - MyWebsite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding-top: 70px;
+        }
+
+        /* Navigation Menu Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .nav-logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-menu li a:hover {
+            opacity: 0.8;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                gap: 0;
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                padding: 15px 0;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+            font-size: 32px;
+        }
+
+        /* Settings Section Styles */
+        .settings-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .settings-section {
+            padding: 30px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .settings-section:last-child {
+            border-bottom: none;
+        }
+
+        .settings-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .setting-item:hover {
+            background: #f0f0f0;
+        }
+
+        .setting-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .setting-label {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .setting-label-text {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .setting-description {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Toggle Switch Styles */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 30px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #667eea;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Select Dropdown Styles */
+        .setting-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .setting-select:hover,
+        .setting-select:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        /* Input Styles */
+        .setting-input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            min-width: 200px;
+        }
+
+        .setting-input:hover,
+        .setting-input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        /* Button Styles */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d5dbdb;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        /* Status Messages */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span>🚀</span>
+                <span>MyWebsite</span>
+            </a>
+            <button class="nav-toggle" onclick="toggleMenu()">
+                ☰
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="index.html">👤 Profile</a></li>
+                <li><a href="#">📰 News</a></li>
+                <li><a href="#">📧 Contact</a></li>
+                <li><a href="settings.html">⚙️ Settings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Settings Content -->
+    <div class="container">
+        <h1>⚙️ Settings</h1>
+        
+        <div id="statusAlert" class="alert"></div>
+
+        <div class="settings-container">
+            <!-- Account Settings -->
+            <div class="settings-section">
+                <div class="settings-title">👤 Account Settings</div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Email</span>
+                        <span class="setting-description">Your email address for login</span>
+                    </div>
+                    <input type="email" class="setting-input" value="john.doe@example.com" id="emailInput">
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Username</span>
+                        <span class="setting-description">Your public display name</span>
+                    </div>
+                    <input type="text" class="setting-input" value="johndoe" id="usernameInput">
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Phone Number</span>
+                        <span class="setting-description">For account recovery</span>
+                    </div>
+                    <input type="tel" class="setting-input" value="+1 (555) 123-4567" id="phoneInput">
+                </div>
+            </div>
+
+            <!-- Privacy Settings -->
+            <div class="settings-section">
+                <div class="settings-title">🔐 Privacy & Security</div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Two-Factor Authentication</span>
+                        <span class="setting-description">Add extra security to your account</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Profile Visibility</span>
+                        <span class="setting-description">Who can see your profile</span>
+                    </div>
+                    <select class="setting-select" id="visibilitySelect">
+                        <option value="public">Public</option>
+                        <option value="friends">Friends Only</option>
+                        <option value="private">Private</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Email Notifications</span>
+                        <span class="setting-description">Receive updates via email</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="settings-section">
+                <div class="settings-title">🎨 Preferences</div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Theme</span>
+                        <span class="setting-description">Choose your preferred theme</span>
+                    </div>
+                    <select class="setting-select" id="themeSelect">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="auto">Auto (System)</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Language</span>
+                        <span class="setting-description">Select your preferred language</span>
+                    </div>
+                    <select class="setting-select" id="languageSelect">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Auto-Save</span>
+                        <span class="setting-description">Automatically save your changes</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Notification Settings -->
+            <div class="settings-section">
+                <div class="settings-title">🔔 Notifications</div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Push Notifications</span>
+                        <span class="setting-description">Receive push notifications</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Marketing Emails</span>
+                        <span class="setting-description">Receive promotional emails</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Notification Frequency</span>
+                        <span class="setting-description">How often to receive notifications</span>
+                    </div>
+                    <select class="setting-select" id="frequencySelect">
+                        <option value="instant">Instant</option>
+                        <option value="daily">Daily Digest</option>
+                        <option value="weekly">Weekly Digest</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="settings-section">
+                <div class="settings-title">⚠️ Danger Zone</div>
+                
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Reset to Defaults</span>
+                        <span class="setting-description">Reset all settings to default values</span>
+                    </div>
+                    <button class="btn btn-secondary" onclick="resetSettings()">Reset</button>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <span class="setting-label-text">Delete Account</span>
+                        <span class="setting-description">Permanently delete your account and data</span>
+                    </div>
+                    <button class="btn btn-danger" onclick="deleteAccount()">Delete</button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="padding: 30px;">
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="saveSettings()">💾 Save Changes</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 MyWebsite. All rights reserved. | Built with ❤️ and modern web technologies</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Menu Toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Save Settings
+        function saveSettings() {
+            const alert = document.getElementById('statusAlert');
+            alert.textContent = '✅ Settings saved successfully!';
+            alert.className = 'alert success';
+            
+            // Store in localStorage
+            const settings = {
+                email: document.getElementById('emailInput').value,
+                username: document.getElementById('usernameInput').value,
+                phone: document.getElementById('phoneInput').value,
+                theme: document.getElementById('themeSelect').value,
+                language: document.getElementById('languageSelect').value,
+                visibility: document.getElementById('visibilitySelect').value,
+                frequency: document.getElementById('frequencySelect').value
+            };
+            
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+            
+            // Hide alert after 3 seconds
+            setTimeout(() => {
+                alert.className = 'alert';
+                alert.textContent = '';
+            }, 3000);
+        }
+
+        // Reset Settings
+        function resetSettings() {
+            if (confirm('Are you sure you want to reset all settings to defaults?')) {
+                document.getElementById('emailInput').value = 'john.doe@example.com';
+                document.getElementById('usernameInput').value = 'johndoe';
+                document.getElementById('phoneInput').value = '+1 (555) 123-4567';
+                document.getElementById('themeSelect').value = 'light';
+                document.getElementById('languageSelect').value = 'en';
+                document.getElementById('visibilitySelect').value = 'public';
+                document.getElementById('frequencySelect').value = 'instant';
+                
+                const alert = document.getElementById('statusAlert');
+                alert.textContent = '🔄 Settings reset to defaults!';
+                alert.className = 'alert success';
+                
+                setTimeout(() => {
+                    alert.className = 'alert';
+                    alert.textContent = '';
+                }, 3000);
+            }
+        }
+
+        // Delete Account
+        function deleteAccount() {
+            if (confirm('Are you absolutely sure? This action cannot be undone!')) {
+                if (confirm('This will permanently delete your account and all associated data.')) {
+                    const alert = document.getElementById('statusAlert');
+                    alert.textContent = '❌ Account deletion initiated. Redirecting...';
+                    alert.className = 'alert error';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                }
+            }
+        }
+
+        // Load saved settings on page load
+        window.addEventListener('load', () => {
+            const savedSettings = localStorage.getItem('userSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                if (settings.email) document.getElementById('emailInput').value = settings.email;
+                if (settings.username) document.getElementById('usernameInput').value = settings.username;
+                if (settings.phone) document.getElementById('phoneInput').value = settings.phone;
+                if (settings.theme) document.getElementById('themeSelect').value = settings.theme;
+                if (settings.language) document.getElementById('languageSelect').value = settings.language;
+                if (settings.visibility) document.getElementById('visibilitySelect').value = settings.visibility;
+                if (settings.frequency) document.getElementById('frequencySelect').value = settings.frequency;
+            }
+        });
+    </script>
+</body>
+</html>
