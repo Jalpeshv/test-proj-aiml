@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Sarah Mitchell - Researcher Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --text: #34495e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.3) 0%, transparent 50%);
+            animation: float 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section with Glassmorphism */
+        .hero-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 60px 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-image-container {
+            flex-shrink: 0;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+            border: 5px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-content {
+            flex: 1;
+            color: white;
+            min-width: 300px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero-content .title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero-content .bio {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Glass Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .glass-card h2 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .glass-card h3 {
+            color: var(--dark);
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Research Interests */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .interest-tag {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-align: center;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .interest-tag:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Publications */
+        .publication {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .publication:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .publication-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .publication-meta {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .publication-venue {
+            font-style: italic;
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        /* Stats Cards */
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Experience & Education */
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 25px;
+            border-left: 2px solid var(--primary);
+        }
+
+        .timeline-item::before {
+            content: '●';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            color: var(--primary);
+            font-size: 12px;
+            background: white;
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .timeline-org {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            transition: width 1s ease-out;
+        }
+
+        /* Contact Section */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .contact-text {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        /* Awards */
+        .award {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .award:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+        }
+
+        .award-icon {
+            font-size: 32px;
+        }
+
+        .award-content h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .award-content p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section {
+                padding: 40px 30px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+                font-size: 60px;
+            }
+
+            .glass-card {
+                padding: 20px;
+            }
+
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="profile-image-container">
+                <div class="profile-image">👩‍🔬</div>
+            </div>
+            <div class="hero-content">
+                <h1>Dr. Sarah Mitchell</h1>
+                <p class="title">Senior Research Scientist | AI & Machine Learning Expert | Published Author</p>
+                <p class="bio">
+                    Pioneering research in artificial intelligence and machine learning with a focus on 
+                    natural language processing and computer vision. Published 50+ peer-reviewed papers 
+                    and leading innovative projects at the intersection of AI and healthcare.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-btn">📚 Google Scholar</a>
+                    <a href="#" class="social-btn">🔗 LinkedIn</a>
+                    <a href="#" class="social-btn">💻 GitHub</a>
+                    <a href="#" class="social-btn">🐦 Twitter</a>
+                    <a href="#" class="social-btn">📧 Email</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Research Interests -->
+                <div class="glass-card fade-in">
+                    <h2>🔬 Research Interests</h2>
+                    <div class="interests-grid">
+                        <div class="interest-tag">Machine Learning</div>
+                        <div class="interest-tag">Deep Learning</div>
+                        <div class="interest-tag">Natural Language Processing</div>
+                        <div class="interest-tag">Computer Vision</div>
+                        <div class="interest-tag">AI Ethics</div>
+                        <div class="interest-tag">Healthcare AI</div>
+                        <div class="interest-tag">Neural Networks</div>
+                        <div class="interest-tag">Data Science</div>
+                    </div>
+                </div>
+
+                <!-- Recent Publications -->
+                <div class="glass-card fade-in">
+                    <h2>📖 Recent Publications</h2>
+                    <div class="publication">
+                        <div class="publication-title">
+                            Advances in Transformer Models for Medical Image Analysis
+                        </div>
+                        <div class="publication-meta">
+                            S. Mitchell, J. Chen, R. Patel | 2025
+                        </div>
+                        <div class="publication-venue">
+                            Nature Machine Intelligence | Citations: 124
+                        </div>
+                    </div>
+                    <div class="publication">
+                        <div class="publication-title">
+                            Ethical Frameworks for AI-Driven Healthcare Decisions
+                        </div>
+                        <div class="publication-meta">
+                            S. Mitchell, A. Thompson | 2025
+                        </div>
+                        <div class="publication-venue">
+                            Journal of Medical Ethics | Citations: 89
+                        </div>
+                    </div>
+                    <div class="publication">
+                        <div class="publication-title">
+                            Zero-Shot Learning in Clinical Natural Language Processing
+                        </div>
+                        <div class="publication-meta">
+                            S. Mitchell et al. | 2024
+                        </div>
+                        <div class="publication-venue">
+                            ACL 2024 Conference | Citations: 156
+                        </div>
+                    </div>
+                    <div class="publication">
+                        <div class="publication-title">
+                            Federated Learning for Privacy-Preserving Medical AI
+                        </div>
+                        <div class="publication-meta">
+                            S. Mitchell, K. Williams | 2024
+                        </div>
+                        <div class="publication-venue">
+                            IEEE Transactions on Medical Imaging | Citations: 201
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="glass-card fade-in">
+                    <h2>💼 Professional Experience</h2>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2022 - Present</span>
+                        <div class="timeline-title">Senior Research Scientist</div>
+                        <div class="timeline-org">AI Research Lab, Stanford University</div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2019 - 2022</span>
+                        <div class="timeline-title">Research Scientist</div>
+                        <div class="timeline-org">Google AI Healthcare</div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2017 - 2019</span>
+                        <div class="timeline-title">Postdoctoral Researcher</div>
+                        <div class="timeline-org">MIT Computer Science and AI Lab</div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2015 - 2017</span>
+                        <div class="timeline-title">Research Assistant</div>
+                        <div class="timeline-org">Carnegie Mellon University</div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="glass-card fade-in">
+                    <h2>🎓 Education</h2>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2017</span>
+                        <div class="timeline-title">Ph.D. in Computer Science</div>
+                        <div class="timeline-org">Carnegie Mellon University</div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2013</span>
+                        <div class="timeline-title">M.S. in Artificial Intelligence</div>
+                        <div class="timeline-org">Stanford University</div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-year">2011</span>
+                        <div class="timeline-title">B.S. in Computer Science</div>
+                        <div class="timeline-org">University of California, Berkeley</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <!-- Stats -->
+                <div class="glass-card fade-in">
+                    <h2>📊 Research Impact</h2>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-number">52</div>
+                            <div class="stat-label">Publications</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3,847</div>
+                            <div class="stat-label">Citations</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">42</div>
+                            <div class="stat-label">h-index</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">18</div>
+                            <div class="stat-label">Active Projects</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="glass-card fade-in">
+                    <h2>💻 Technical Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Python & PyTorch</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>TensorFlow & Keras</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>NLP & Transformers</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Computer Vision</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Data Analysis</span>
+                                <span>93%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 93%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Research Methodology</span>
+                                <span>96%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 96%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Awards & Honors -->
+                <div class="glass-card fade-in">
+                    <h2>🏆 Awards & Honors</h2>
+                    <div class="award">
+                        <div class="award-icon">🥇</div>
+                        <div class="award-content">
+                            <h4>Best Paper Award - NeurIPS 2025</h4>
+                            <p>Outstanding Research in AI</p>
+                        </div>
+                    </div>
+                    <div class="award">
+                        <div class="award-icon">⭐</div>
+                        <div class="award-content">
+                            <h4>Rising Star in AI Award</h4>
+                            <p>IEEE Computer Society, 2024</p>
+                        </div>
+                    </div>
+                    <div class="award">
+                        <div class="award-icon">🎖️</div>
+                        <div class="award-content">
+                            <h4>NSF CAREER Award</h4>
+                            <p>National Science Foundation, 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="glass-card fade-in">
+                    <h2>📬 Contact Information</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-text">sarah.mitchell@stanford.edu</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🏢</div>
+                        <div class="contact-text">Gates Computer Science Building<br>Stanford, CA 94305</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">+1 (650) 555-0123</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div class="contact-text">www.sarahmitchell.ai</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animate skill bars on load
+        window.addEventListener('load', () => {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
