@@ -14,100 +14,12 @@
         body {
             font-family: Arial, sans-serif;
             background: #f5f5f5;
-            padding-top: 70px;
-        }
-
-        /* Navigation Menu Styles */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
-
-        .nav-logo {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-menu li a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            transition: opacity 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-menu li a:hover {
-            opacity: 0.8;
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 60px;
-                flex-direction: column;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                gap: 0;
-                padding: 20px 0;
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .nav-menu li {
-                padding: 15px 0;
-            }
-
-            .nav-toggle {
-                display: block;
-            }
+            padding: 20px;
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
 
         h1 {
@@ -262,160 +174,10 @@
         .dot.active {
             background: #667eea;
         }
-
-        /* Footer Styles */
-        footer {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            margin-top: 80px;
-        }
-
-        .footer-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 40px 20px 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 15px;
-            font-size: 18px;
-            color: #f39c12;
-        }
-
-        .footer-section p, .footer-section ul {
-            color: #bdc3c7;
-            line-height: 1.8;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .footer-section a {
-            color: #bdc3c7;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #f39c12;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            font-size: 24px;
-            transition: transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: scale(1.2);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #95a5a6;
-        }
-
-        /* Profile Page Styles */
-        .profile-page {
-            display: none;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .profile-page.active {
-            display: block;
-        }
-
-        .profile-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .profile-avatar {
-            font-size: 80px;
-            margin-bottom: 15px;
-        }
-
-        .profile-name {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .profile-bio {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        .profile-details {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .profile-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 0;
-            border-bottom: 1px solid #ecf0f1;
-        }
-
-        .profile-item:last-child {
-            border-bottom: none;
-        }
-
-        .profile-item-icon {
-            font-size: 24px;
-        }
-
-        .profile-item-label {
-            font-weight: bold;
-            color: #333;
-            min-width: 120px;
-        }
-
-        .profile-item-value {
-            color: #666;
-        }
-
-        .home-content {
-            display: block;
-        }
-
-        .home-content.hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     <!-- Navigation Menu -->
     <nav class="navbar">
         <div class="nav-container">
@@ -439,6 +201,10 @@
     <div class="home-content" id="homeContent">
         <div class="container">
             <h1>Card View & Slider Demo</h1>
+=======
+    <div class="container">
+        <h1>Card View & Slider Demo</h1>
+>>>>>>> 5a639b3cc00e55d4567652101b1813ffc3f905d4
         
         <!-- Card View Section -->
         <div class="card-container">
@@ -510,100 +276,7 @@
             </div>
             <div class="slider-dots" id="sliderDots"></div>
         </div>
-        </div>
     </div>
-
-    <!-- Profile Page -->
-    <div class="profile-page" id="profilePage">
-        <div class="profile-header">
-            <div class="profile-avatar">👤</div>
-            <h2 class="profile-name">John Doe</h2>
-            <p class="profile-bio">Full Stack Developer | Tech Enthusiast | Creative Designer</p>
-        </div>
-        <div class="profile-details">
-            <div class="profile-item">
-                <span class="profile-item-icon">📧</span>
-                <span class="profile-item-label">Email:</span>
-                <span class="profile-item-value">john.doe@example.com</span>
-            </div>
-            <div class="profile-item">
-                <span class="profile-item-icon">📱</span>
-                <span class="profile-item-label">Phone:</span>
-                <span class="profile-item-value">+1 (555) 123-4567</span>
-            </div>
-            <div class="profile-item">
-                <span class="profile-item-icon">📍</span>
-                <span class="profile-item-label">Location:</span>
-                <span class="profile-item-value">San Francisco, CA</span>
-            </div>
-            <div class="profile-item">
-                <span class="profile-item-icon">💼</span>
-                <span class="profile-item-label">Company:</span>
-                <span class="profile-item-value">Tech Innovations Inc.</span>
-            </div>
-            <div class="profile-item">
-                <span class="profile-item-icon">🎓</span>
-                <span class="profile-item-label">Education:</span>
-                <span class="profile-item-value">B.S. Computer Science</span>
-            </div>
-            <div class="profile-item">
-                <span class="profile-item-icon">🌐</span>
-                <span class="profile-item-label">Website:</span>
-                <span class="profile-item-value">www.johndoe.dev</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>🔥 2026 Tech Trends</h3>
-                    <ul>
-                        <li>🤖 AI-Powered Development Tools</li>
-                        <li>🌐 Web3 & Decentralization</li>
-                        <li>⚡ Edge Computing Evolution</li>
-                        <li>🔐 Zero Trust Security</li>
-                        <li>📱 Progressive Web Apps</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>🚀 Popular Frameworks</h3>
-                    <ul>
-                        <li>⚛️ React 19 & Next.js 15</li>
-                        <li>💚 Vue 4 & Nuxt 4</li>
-                        <li>🅰️ Angular 18</li>
-                        <li>⚡ Vite 6 Build Tool</li>
-                        <li>🔷 TypeScript 5.5</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>💡 Development Trends</h3>
-                    <ul>
-                        <li>🎨 Tailwind CSS & Utility-First</li>
-                        <li>🔌 Serverless Architecture</li>
-                        <li>📊 Real-time Data Streaming</li>
-                        <li>🎯 Micro-Frontend Patterns</li>
-                        <li>🔄 JAMstack Evolution</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Connect With Us</h3>
-                    <p>Stay updated with the latest in web development and technology.</p>
-                    <div class="social-links">
-                        <a href="#" title="GitHub">🐙</a>
-                        <a href="#" title="Twitter">🐦</a>
-                        <a href="#" title="LinkedIn">💼</a>
-                        <a href="#" title="YouTube">📺</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 MyWebsite. All rights reserved. | Built with ❤️ and modern web technologies</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
         let currentSlide = 0;
@@ -652,27 +325,6 @@
 
         // Initialize
         updateSlider();
-
-        // Navigation Menu Toggle
-        function toggleMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-        }
-
-        // Page Navigation
-        function showHome() {
-            document.getElementById('homeContent').classList.remove('hidden');
-            document.getElementById('profilePage').classList.remove('active');
-            document.getElementById('navMenu').classList.remove('active');
-            window.scrollTo(0, 0);
-        }
-
-        function showProfile() {
-            document.getElementById('homeContent').classList.add('hidden');
-            document.getElementById('profilePage').classList.add('active');
-            document.getElementById('navMenu').classList.remove('active');
-            window.scrollTo(0, 0);
-        }
     </script>
 </body>
 </html>
